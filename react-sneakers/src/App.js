@@ -1,6 +1,82 @@
 function App() {
     return (
         <div className="wrapper clear">
+            <div className="overlay">
+                <div className="drawer">
+                    <h2 className="d-flex justify-between mb-30">
+                        Корзина
+                        <img
+                            className="removeBtn  cu-p"
+                            src="/img/btn-remove.svg"
+                            alt="Remove"
+                        />
+                    </h2>
+
+                    <div className="items">
+                        <div className="cartItem d-flex align-center mb-20">
+                            <img
+                                className="mr-20"
+                                width={70}
+                                height={70}
+                                src="/img/sneakers/1.jpg"
+                                alt="Sneakers"
+                            />
+                            <div className="mr-20">
+                                <p className="mb-5">
+                                    Мужские Кроссовки Nike Air Max 270
+                                </p>
+                                <b>12 999 руб.</b>
+                            </div>
+                            <img
+                                className="removeBtn"
+                                src="/img/btn-remove.svg"
+                                alt="Remove"
+                            />
+                        </div>
+
+                        <div className="cartItem d-flex align-center mb-20">
+                            <img
+                                className="mr-20"
+                                width={70}
+                                height={70}
+                                src="/img/sneakers/1.jpg"
+                                alt="Sneakers"
+                            />
+                            <div className="mr-20">
+                                <p className="mb-5">
+                                    Мужские Кроссовки Nike Air Max 270
+                                </p>
+                                <b>12 999 руб.</b>
+                            </div>
+                            <img
+                                className="removeBtn"
+                                src="/img/btn-remove.svg"
+                                alt="Remove"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="cartTotalBlock">
+                        <ul>
+                            <li>
+                                <span>Итого: </span>
+                                <div></div>
+                                <b>21 498 руб. </b>
+                            </li>
+                            <li>
+                                <span>Налог 5%: </span>
+                                <div></div>
+                                <b>1074 руб. </b>
+                            </li>
+                        </ul>
+                        <button className="greenBtn">
+                            Оформить заказ
+                            <img src="/img/arrow.svg" alt="Arrow" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <header className="d-flex justify-between align-center p-40">
                 <div className="d-flex align-center">
                     <img
@@ -68,11 +144,34 @@ function App() {
                     </ul>
                 </div>
             </header>
+
             <div className="content p-40">
-                <h1 className="mb-40">Все кроссовки</h1>
+                <div className="d-flex justify-between align-center mb-40">
+                    <h1>Все кроссовки</h1>
+                    <div className="search-block d-flex align-center">
+                        <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M15.25 15.25L11.8855 11.8795L15.25 15.25ZM13.75 7.375C13.75 9.06576 13.0784 10.6873 11.8828 11.8828C10.6873 13.0784 9.06576 13.75 7.375 13.75C5.68424 13.75 4.06274 13.0784 2.86719 11.8828C1.67165 10.6873 1 9.06576 1 7.375C1 5.68424 1.67165 4.06274 2.86719 2.86719C4.06274 1.67165 5.68424 1 7.375 1C9.06576 1 10.6873 1.67165 11.8828 2.86719C13.0784 4.06274 13.75 5.68424 13.75 7.375V7.375Z"
+                                stroke="#E4E4E4"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                            />
+                        </svg>
+                        <input placeholder="Поиск..." />
+                    </div>
+                </div>
 
                 <div className="d-flex">
                     <div className="card">
+                        <div className="favorite">
+                            <img src="/img/heart-unliked.svg" alt="Unliked" />
+                        </div>
                         <img
                             width={133}
                             height={112}
