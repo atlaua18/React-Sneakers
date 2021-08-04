@@ -2,6 +2,29 @@ import { Card } from "./components/Card/Card";
 import { DrawerCart } from "./components/DrawerCart/DrawerCart";
 import { Header } from "./components/Header/Header";
 
+const arr = [
+    {
+        name: "Мужские Кроссовки Nike Blazer Mid Suede",
+        price: 12999,
+        img: "/img/sneakers/1.jpg",
+    },
+    {
+        name: "Мужские Кроссовки Nike Air Max 270",
+        price: 15600,
+        img: "/img/sneakers/2.jpg",
+    },
+    {
+        name: "Мужские Кроссовки Nike Blazer Mid Suede",
+        price: 8499,
+        img: "/img/sneakers/3.jpg",
+    },
+    {
+        name: "Кроссовки Puma X Aka Boku Future Rider",
+        price: 7600,
+        img: "/img/sneakers/4.jpg",
+    },
+];
+
 function App() {
     return (
         <div className="wrapper clear">
@@ -31,7 +54,16 @@ function App() {
                 </div>
 
                 <div className="d-flex">
-                    <Card />
+                    {/* <Card/> */}
+                    {arr.map((obj) => (
+                        <Card
+                            title={obj.name}
+                            price={obj.price}
+                            img={obj.img}
+                            onClickFavorite={() => console.log("Добавили в закладки")}
+                            onClickBtnPlus={() => console.log("Нажали плюс")}
+                        />
+                    ))}
                 </div>
             </div>
         </div>
@@ -39,77 +71,3 @@ function App() {
 }
 
 export default App;
-
-// {
-    /* <div className="card">
-                        <img
-                            width={133}
-                            height={112}
-                            src="/img/sneakers/2.jpg"
-                            alt=""
-                        />
-                        <h5>Мужские Кроссовки Nike Blazer Mid Suede</h5>
-                        <div className="d-flex justify-between  align-center">
-                            <div className="d-flex flex-column">
-                                <span>Цена: </span>
-                                <b>12 999 руб.</b>
-                            </div>
-                            <button className="button">
-                                <img
-                                    width={11}
-                                    height={11}
-                                    src="/img/plus.svg"
-                                    alt="Плюс"
-                                />
-                            </button>
-                        </div>
-                    </div>
-
-                    <div className="card">
-                        <img
-                            width={133}
-                            height={112}
-                            src="/img/sneakers/3.jpg"
-                            alt=""
-                        />
-                        <h5>Мужские Кроссовки Nike Blazer Mid Suede</h5>
-                        <div className="d-flex justify-between  align-center">
-                            <div className="d-flex flex-column">
-                                <span>Цена: </span>
-                                <b>12 999 руб.</b>
-                            </div>
-                            <button className="button">
-                                <img
-                                    width={11}
-                                    height={11}
-                                    src="/img/plus.svg"
-                                    alt="Плюс"
-                                />
-                            </button>
-                        </div>
-                    </div>
-
-                    <div className="card">
-                        <img
-                            width={133}
-                            height={112}
-                            src="/img/sneakers/4.jpg"
-                            alt=""
-                        />
-                        <h5>Мужские Кроссовки Nike Blazer Mid Suede</h5>
-                        <div className="d-flex justify-between  align-center">
-                            <div className="d-flex flex-column">
-                                <span>Цена: </span>
-                                <b>12 999 руб.</b>
-                            </div>
-                            <button className="button">
-                                <img
-                                    width={11}
-                                    height={11}
-                                    src="/img/plus.svg"
-                                    alt="Плюс"
-                                />
-                            </button>
-                        </div>
-                    </div> */
-// }
