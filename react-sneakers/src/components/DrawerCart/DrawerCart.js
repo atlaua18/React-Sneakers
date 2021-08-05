@@ -1,60 +1,47 @@
 import styles from "./drawerCart.module.scss";
 
-export function DrawerCart() {
-    return ( 
-        <div style={{ display: "none" }} className={styles.overlay}>
+export function DrawerCart({ onClose, items = [] }) {
+    return (
+        <div className={styles.overlay}>
             <div className={styles.drawer}>
                 <h2 className="d-flex justify-between mb-30">
                     Корзина
                     <img
-                        className={styles.removeBtn + " " + "cu-p"}
+                        onClick={onClose}
+                        // className={styles.removeBtn + " " + "cu-p"}
+                        className={(styles.removeBtn, "cu-p")}
                         src="/img/btn-remove.svg"
-                        alt="Remove"
+                        alt="Close"
                     />
                 </h2>
 
                 <div className={styles.items}>
-                    <div className={styles.cartItem + " " + "d-flex align-center mb-20"}>
-                        <img
-                            className="mr-20"
-                            width={70}
-                            height={70}
-                            src="/img/sneakers/1.jpg"
-                            alt="Sneakers"
-                        />
-                        <div className="mr-20">
-                            <p className="mb-5">
-                                Мужские Кроссовки Nike Air Max 270
-                            </p>
-                            <b>12 999 руб.</b>
-                        </div>
-                        <img
-                            className={styles.removeBtn}
-                            src="/img/btn-remove.svg"
-                            alt="Remove"
-                        />
-                    </div>
-
-                    <div className={styles.cartItem + " " + "d-flex align-center mb-20"}>
-                        <img
-                            className="mr-20"
-                            width={70}
-                            height={70}
-                            src="/img/sneakers/1.jpg"
-                            alt="Sneakers"
-                        />
-                        <div className="mr-20">
-                            <p className="mb-5">
-                                Мужские Кроссовки Nike Air Max 270
-                            </p>
-                            <b>12 999 руб.</b>
-                        </div>
-                        <img
-                            className={styles.removeBtn}
-                            src="/img/btn-remove.svg"
-                            alt="Remove"
-                        />
-                    </div>
+                    {items.map((obj) => {
+                        return (<div
+                            className={
+                                (styles.cartItem, "d-flex align-center mb-20")
+                            }
+                        >
+                            <img
+                                className="mr-20"
+                                width={70}
+                                height={70}
+                                src={obj.img}
+                                alt="Sneakers"
+                            />
+                            <div className="mr-20">
+                                <p className="mb-5">
+                                    {obj.title}
+                                </p>
+                                <b>{obj.price} руб.</b>
+                            </div>
+                            <img
+                                className={styles.removeBtn}
+                                src="/img/btn-remove.svg"
+                                alt="Close"
+                            />
+                        </div>)
+                    })}
                 </div>
 
                 <div className={styles.cartTotalBlock}>

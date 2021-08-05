@@ -1,38 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card } from "./components/Card/Card";
 import { DrawerCart } from "./components/DrawerCart/DrawerCart";
 import { Header } from "./components/Header/Header";
 
-const arr = [
-    {
-        name: "Мужские Кроссовки Nike Blazer Mid Suede",
-        price: 12999,
-        img: "/img/sneakers/1.jpg",
-    },
-    {
-        name: "Мужские Кроссовки Nike Air Max 270",
-        price: 15600,
-        img: "/img/sneakers/2.jpg",
-    },
-    {
-        name: "Мужские Кроссовки Nike Blazer Mid Suede",
-        price: 8499,
-        img: "/img/sneakers/3.jpg",
-    },
-    {
-        name: "Кроссовки Puma X Aka Boku Future Rider",
-        price: 7600,
-        img: "/img/sneakers/4.jpg",
-    },
-];
+// const arr = [
+//     {
+//         name: "Мужские Кроссовки Nike Blazer Mid Suede",
+//         price: 12999,
+//         img: "/img/sneakers/1.jpg",
+//     },
+//     {
+//         name: "Мужские Кроссовки Nike Air Max 270",
+//         price: 15600,
+//         img: "/img/sneakers/2.jpg",
+//     },
+//     {
+//         name: "Мужские Кроссовки Nike Blazer Mid Suede",
+//         price: 8499,
+//         img: "/img/sneakers/3.jpg",
+//     },
+//     {
+//         name: "Кроссовки Puma X Aka Boku Future Rider",
+//         price: 7600,
+//         img: "/img/sneakers/4.jpg",
+//     },
+// ];
 
 function App() {
-    const [] = React.useState('');
+    const [items, setItems] = useState([]);
+    const [cartItems, setCartItems] = useState([]);
+    const [cartOpened, setCartOpened] = React.useState(false);
+
+    React.useEffect(() => {fetch("https://610c092a66dd8f0017b76c0b.mockapi.io/items")
+    .then(resp => {
+        return resp.json();
+    })
+    .then(json => {
+        setItems(json);
+    })}, []);
+
+    const onAddToCart = (obj) => {
+        setCartItems(prev => [...prev, obj]);
+    }
+    console.log(cartItems);
 
     return (
         <div className="wrapper clear">
-            <DrawerCart />
-            <Header />
+            {cartOpened && <DrawerCart items={cartItems} onClose={() => setCartOpened(false)} />}
+            <Header onClickCart={() => setCartOpened(true)} />
 
             <div className="content p-40">
                 <div className="d-flex justify-between align-center mb-40">
@@ -56,15 +71,15 @@ function App() {
                     </div>
                 </div>
 
-                <div className="d-flex">
+                <div className="d-flex flex-wrap">
                     {/* <Card/> */}
-                    {arr.map((obj) => (
+                    {items.map((item) => (
                         <Card
-                            title={obj.name}
-                            price={obj.price}
-                            img={obj.img}
+                            title={item.name}
+                            price={item.price}
+                            img={item.img}
                             onClickFavorite={() => console.log("Добавили в закладки")}
-                            onClickBtnPlus={() => console.log("Нажали плюс")}
+                            onClickBtnPlus={(obj) => onAddToCart(obj)}
                         />
                     ))}
                 </div>

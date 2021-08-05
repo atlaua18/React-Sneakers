@@ -3,11 +3,12 @@
     padding: 20px;
     width: 220px;
     border-radius: 40px;
-    // margin-right: 40px;
+    margin-right: 40px;
+    margin-bottom: 30px;
     transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
 
-    &:not(:last-child) {
-        margin-right: 40px;
+    &:nth-child(4n) {
+        margin-right: 0;
     }
 
     &:hover {
