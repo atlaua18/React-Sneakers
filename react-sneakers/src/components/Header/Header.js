@@ -19,7 +19,7 @@ export function Header() {
                     <ul className="d-flex">
                         <li className="mr-30">
                             <svg
-                                className="mr-30"
+                                className="mr-30 cu-p"
                                 width="20"
                                 height="20"
                                 viewBox="0 0 20 20"

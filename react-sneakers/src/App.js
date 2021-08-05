@@ -1,3 +1,4 @@
+import React from "react";
 import { Card } from "./components/Card/Card";
 import { DrawerCart } from "./components/DrawerCart/DrawerCart";
 import { Header } from "./components/Header/Header";
@@ -26,6 +27,8 @@ const arr = [
 ];
 
 function App() {
+    const [] = React.useState('');
+
     return (
         <div className="wrapper clear">
             <DrawerCart />
