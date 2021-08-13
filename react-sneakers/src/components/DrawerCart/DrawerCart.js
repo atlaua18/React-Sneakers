@@ -1,6 +1,14 @@
+import { useState } from "react";
 import styles from "./drawerCart.module.scss";
 
-export function DrawerCart({ onClose, items = [] }) {
+export function DrawerCart({ onClose, onRemove, items = [] }) {
+    // const [isDeleteItem, setIsDeleteItem] = useState(false);
+
+    const deleteFromCart = (obj) => {
+        // setIsDeleteItem(true)
+        console.log(obj)
+    }
+
     return (
         <div className={styles.overlay}>
             <div className={styles.drawer}>
@@ -36,6 +44,7 @@ export function DrawerCart({ onClose, items = [] }) {
                                 <b>{obj.price} руб.</b>
                             </div>
                             <img
+                                onClick={() => deleteFromCart(obj)} ////////
                                 className={styles.removeBtn}
                                 src="/img/btn-remove.svg"
                                 alt="Close"

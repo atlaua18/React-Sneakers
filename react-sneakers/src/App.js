@@ -3,55 +3,48 @@ import { Card } from "./components/Card/Card";
 import { DrawerCart } from "./components/DrawerCart/DrawerCart";
 import { Header } from "./components/Header/Header";
 
-// const arr = [
-//     {
-//         name: "Мужские Кроссовки Nike Blazer Mid Suede",
-//         price: 12999,
-//         img: "/img/sneakers/1.jpg",
-//     },
-//     {
-//         name: "Мужские Кроссовки Nike Air Max 270",
-//         price: 15600,
-//         img: "/img/sneakers/2.jpg",
-//     },
-//     {
-//         name: "Мужские Кроссовки Nike Blazer Mid Suede",
-//         price: 8499,
-//         img: "/img/sneakers/3.jpg",
-//     },
-//     {
-//         name: "Кроссовки Puma X Aka Boku Future Rider",
-//         price: 7600,
-//         img: "/img/sneakers/4.jpg",
-//     },
-// ];
-
 function App() {
     const [items, setItems] = useState([]);
     const [cartItems, setCartItems] = useState([]);
+    const [searchValue, setSearchValue] = useState(" ");
     const [cartOpened, setCartOpened] = React.useState(false);
 
-    React.useEffect(() => {fetch("https://610c092a66dd8f0017b76c0b.mockapi.io/items")
-    .then(resp => {
-        return resp.json();
-    })
-    .then(json => {
-        setItems(json);
-    })}, []);
+    React.useEffect(() => {
+        fetch("https://610c092a66dd8f0017b76c0b.mockapi.io/items")
+            .then((resp) => {
+                return resp.json();
+            })
+            .then((json) => {
+                setItems(json);
+            });
+    }, []);
 
     const onAddToCart = (obj) => {
-        setCartItems(prev => [...prev, obj]);
-    }
-    console.log(cartItems);
+        setCartItems((prev) => [...prev, obj]);
+    };
+
+    const onChangeSearchInput = (event) => {
+        console.log(event.target.value);
+        setSearchValue(event.target.value);
+    };
 
     return (
         <div className="wrapper clear">
-            {cartOpened && <DrawerCart items={cartItems} onClose={() => setCartOpened(false)} />}
+            {cartOpened && (
+                <DrawerCart
+                    items={cartItems}
+                    onClose={() => setCartOpened(false)}
+                />
+            )}
             <Header onClickCart={() => setCartOpened(true)} />
 
             <div className="content p-40">
                 <div className="d-flex justify-between align-center mb-40">
-                    <h1>Все кроссовки</h1>
+                    <h1>
+                        {searchValue
+                            ? `Поиск по запросу: "${searchValue}"`
+                            : "Все кроссовки"}
+                    </h1>
                     <div className="search-block d-flex align-center">
                         <svg
                             width="16"
@@ -67,21 +60,37 @@ function App() {
                                 stroke-linecap="round"
                             />
                         </svg>
-                        <input placeholder="Поиск..." />
+                        {searchValue && (
+                            <img
+                                onClick={() => setSearchValue("")}
+                                className="clear cu-p"
+                                src="/img/btn-remove.svg"
+                                alt="Close"
+                            />
+                        )}
+                        <input
+                            onChange={onChangeSearchInput}
+                            value={searchValue}
+                            placeholder="Поиск..."
+                        />
                     </div>
                 </div>
 
                 <div className="d-flex flex-wrap">
-                    {/* <Card/> */}
-                    {items.map((item) => (
-                        <Card
-                            title={item.name}
-                            price={item.price}
-                            img={item.img}
-                            onClickFavorite={() => console.log("Добавили в закладки")}
-                            onClickBtnPlus={(obj) => onAddToCart(obj)}
-                        />
-                    ))}
+                    {items
+                        .filter((item) => item.name.toLowerCase().includes(searchValue.toLowerCase()))
+                        .map((item, index) => (
+                            <Card
+                                key={index}
+                                title={item.name}
+                                price={item.price}
+                                img={item.img}
+                                onClickFavorite={() =>
+                                    console.log("Добавили в закладки")
+                                }
+                                onClickBtnPlus={(obj) => onAddToCart(obj)}
+                            />
+                        ))}
                 </div>
             </div>
         </div>
